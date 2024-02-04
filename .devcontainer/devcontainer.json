@@ -1,0 +1,14 @@
+// For format details, see https://aka.ms/devcontainer.json. For config options, see the
+{
+	"name": "StableDiffusion",
+	
+	"build": {
+		"dockerfile": "Dockerfile",
+		"args": {"USERNAME": "sdweb"}
+	},
+	"runArgs": ["--gpus", "all","--shm-size","16gb"],
+
+	"remoteUser": "sdweb",
+	
+	"postStartCommand": "bash setup.sh"
+}
