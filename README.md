@@ -67,7 +67,7 @@ sudo apt-get install -y nvidia-container-toolkit
 
 #### cuda-toolkit 入りのイメージを取得して確認
 以下のページから、使いたいOSとCUDAバージョンのイメージを確認する
-- https://catalog.ngc.nvidia.com/orgs/nvidia/containers/cuda/tags
+- https://hub.docker.com/r/nvidia/cuda
 
 
 現時点で最新の Cuda 12.3.1 Ubuntu 22.04 の場合は `nvidia/cuda:12.3.1-base-ubuntu22.04` なので以下のコマンドを実行
@@ -78,4 +78,39 @@ sudo docker run --rm --gpus all nvidia/cuda:12.3.1-base-ubuntu22.04 nvidia-smi
 
 GPUの情報が表示されれば準備は完了です。
 
-### 2. コンテナを起動する
+## 利用方法
+コマンドパレット（Ctrl + Shitf + P）から、「Dev Containers: ReOpen in Container」を選択する。
+
+自動で Automatic1111版 の Stable Diffusion WebUI を起動する。  
+初回はダウンロードや関連パッケージのインストールが必要なためそれなりの時間がかかる。
+
+起動後はVSCode内のブラウザが起動してWebUIを表示する。  
+ブラウザから直接「[http://127.0.0.1:7860/](http://127.0.0.1:7860/)」を開くこともできる。
+
+## そのほか
+
+### モデルなどの配置先について
+画像の出力先やモデルの配置先などのよく使うディレクトリについては、アクセスしやすいように直下のフォルダを参照するようにしている。
+
+各フォルダの参照と配置・出力するものは以下の通り。
+
+|フォルダ|内容|入出力|元のフォルダ|
+|--|--|--|--|
+|Models|使用したい Stable Diffusion のモデル|使いたいものを配置|stable-diffusion-webui/models/Stable-diffusion|
+|Lora|使用したい Lora|使いたいものを配置|stable-diffusion-webui/models/Lora|
+|LyCORIS|使用したい LyCORIS|使いたいものを配置|stable-diffusion-webui/models/LyCORIS|
+|VAE|使用したい VAE|使いたいものを配置|stable-diffusion-webui/models/VAE|
+|Negatives|使用したい Negatives|使いたいものを配置|stable-diffusion-webui/embeddings|
+|Outputs|出力された画像|生成された画像が出力|stable-diffusion-webui/outputs|
+
+### 再構築について
+アップデートなどで起動しなくなってしまった時は、以下の手順でWebUIの再インストールができる。
+
+1. 「stable-diffusion-webui」ディレクトリを削除
+2. コマンドパレット（Ctrl + Shitf + P）から、「Dev Containers: ReBuild in Container」を選択
+
+また、必要に応じて、以下のディレクトリ内のファイルを削除する。
+
+|フォルダ|内容|入出力|元のフォルダ|
+|--|--|--|--|
+|Extensions|使用している Extensions|WebUIからインストール|stable-diffusion-webui/extensions|

@@ -1,1 +1,8 @@
 stable-diffusion-webui/
+Outputs/
+Models/
+Lora/
+LyCORIS/
+VAE/
+Negatives/
+Extensions/
