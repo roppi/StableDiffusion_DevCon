@@ -7,7 +7,7 @@ RUN apt update && apt upgrade -y
 RUN apt install -y sudo wget git git-lfs
 
 # Install development tools
-RUN apt install -y python3 python3-venv libgl1 libglib2.0-0
+RUN apt install -y python3 python3-venv libgl1 libglib2.0-0 libgoogle-perftools-dev
 
 # Add User
 ARG USERNAME
