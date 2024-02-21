@@ -1,8 +1,16 @@
 # StableDiffusion_DevCon
-Windows + WSL2 + VSCode + Remote Containers + Stable Diffusion WebUI
+Windows + WSL2 + VSCode + Remote Containers + Stable Diffusion WebUI ( + Forge )
 
-ローカル環境でサクッと Stable Diffusion を動かすための設定など。
+ローカル環境でサクッと Stable Diffusion を動かすための設定など。  
 nvidiaのグラボがあることと、WSL2 + Docker Desktop + VSCode が利用できることが前提です。
+
+オプションで、Stable Diffusion WebUI Forge を組み込めます。  
+Forgeを使用する場合は、途中で「WebUI Forge を 使用しますか？[y/N] 」と聞かれるので`y`を入力してください。
+
+## Credits
+- [Stable Diffusion](https://github.com/Stability-AI/stablediffusion)
+- [Stable Diffusion WebUI](https://github.com/AUTOMATIC1111/stable-diffusion-webui)
+- [Stable Diffusion WebUI Forge](https://github.com/lllyasviel/stable-diffusion-webui-forge)
 
 ## 事前準備
 
@@ -66,11 +74,11 @@ sudo apt-get install -y nvidia-container-toolkit
 - https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/install-guide.html
 
 #### cuda-toolkit 入りのイメージを取得して確認
-以下のページから、使いたいOSとCUDAバージョンのイメージを確認する
+以下のページから、使いたいOSとCUDAバージョンのイメージを確認する。
 - https://hub.docker.com/r/nvidia/cuda
 
 
-現時点で最新の Cuda 12.3.1 Ubuntu 22.04 の場合は `nvidia/cuda:12.3.1-base-ubuntu22.04` なので以下のコマンドを実行
+現時点で最新の Cuda 12.3.1 Ubuntu 22.04 の場合は `nvidia/cuda:12.3.1-base-ubuntu22.04` なので以下のコマンドを実行。
 
 ``` bash
 sudo docker run --rm --gpus all nvidia/cuda:12.3.1-base-ubuntu22.04 nvidia-smi
