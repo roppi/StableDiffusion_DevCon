@@ -1,66 +1,45 @@
 #!/usr/bin/env bash
 
+clone_dir=${1:-"stable-diffusion-webui"}
+
 function setup_symlinks {
     # Outputs
-    rm -rf ./stable-diffusion-webui/outputs
-    ln -s "$(pwd)"/Outputs/ ./stable-diffusion-webui/outputs
+    rm -rf "./${clone_dir}/outputs"
+    ln -s "$(pwd)/Outputs/" "./${clone_dir}/outputs"
     # Models
-    rm -rf ./stable-diffusion-webui/models/Stable-diffusion
-    ln -s "$(pwd)"/Models/ ./stable-diffusion-webui/models/Stable-diffusion
+    rm -rf "./${clone_dir}/models/Stable-diffusion"
+    ln -s "$(pwd)/Models/" "./${clone_dir}/models/Stable-diffusion"
     # Lora
-    rm -rf ./stable-diffusion-webui/models/Lora
-    ln -s "$(pwd)"/Lora/ ./stable-diffusion-webui/models/Lora
+    rm -rf "./${clone_dir}/models/Lora"
+    ln -s "$(pwd)/Lora/" "./${clone_dir}/models/Lora"
     # LyCORIS
-    rm -rf ./stable-diffusion-webui/models/LyCORIS
-    ln -s "$(pwd)"/LyCORIS/ ./stable-diffusion-webui/models/LyCORIS
+    rm -rf "./${clone_dir}/models/LyCORIS"
+    ln -s "$(pwd)/LyCORIS/" "./${clone_dir}/models/LyCORIS"
     # VAE
-    rm -rf ./stable-diffusion-webui/models/VAE
-    ln -s "$(pwd)"/VAE/ ./stable-diffusion-webui/models/VAE
+    rm -rf "./${clone_dir}/models/VAE"
+    ln -s "$(pwd)/VAE/" "./${clone_dir}/models/VAE"
     # Negatives
-    rm -rf ./stable-diffusion-webui/embeddings
-    ln -s "$(pwd)"/Negatives/ ./stable-diffusion-webui/embeddings
+    rm -rf "./${clone_dir}/embeddings"
+    ln -s "$(pwd)/Negatives/" "./${clone_dir}/embeddings"
     # Extensions
-    rm -rf ./stable-diffusion-webui/extensions
-    ln -s "$(pwd)"/Extensions/ ./stable-diffusion-webui/extensions
+    rm -rf ./${clone_dir}/extensions
+    ln -s "$(pwd)/Extensions/" "./${clone_dir}/extensions"
     # Setting Files
-    ln -s "$(pwd)"/Settings/params.txt ./stable-diffusion-webui/params.txt
-    ln -s "$(pwd)"/Settings/styles.csv ./stable-diffusion-webui/styles.csv
-}
-
-function setup_forge {
-    cd ./stable-diffusion-webui
-
-    # Add Forge repos
-    git remote add forge https://github.com/lllyasviel/stable-diffusion-webui-forge
-    git fetch forge
-    
-    # Create Branch
-    git branch lllyasviel/main
-    git branch -u forge/main
-
-    # Download Forge
-    git pull
-
-    cd ../
+    ln -s "$(pwd)/Settings/params.txt" "./${clone_dir}/params.txt"
+    ln -s "$(pwd)/Settings/styles.csv" "./${clone_dir}/styles.csv"
 }
 
 
 # Download Setup script
-if [[ ! -d stable-diffusion-webui ]]
+if [[ ! -d "${clone_dir}" ]]
     then
-    # Download WebUI
-    git clone https://github.com/AUTOMATIC1111/stable-diffusion-webui.git
+    # Download WebUI Forge
+    git clone "https://github.com/lllyasviel/stable-diffusion-webui-forge" "${clone_dir}"
 
     # Create Symboliclinks
     setup_symlinks
-
-    # Confirm Setup WebUI Forge
-    read -r -p "WebUI Forge を 使用しますか？[y/N] : " useForge
-    if [[ $useForge = [yY] ]]; then
-        setup_forge
-    fi
 fi
 
 # Setup & Launch webui
-cd stable-diffusion-webui
+cd "${clone_dir}"
 . webui.sh

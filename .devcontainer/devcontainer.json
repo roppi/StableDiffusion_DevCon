@@ -9,7 +9,19 @@
   "runArgs": ["--gpus", "all","--shm-size","16gb"],
 
   "remoteUser": "sdweb",
-  
+
+  "containerEnv": {
+    // Use latest PyTorch
+    // "TORCH_COMMAND": "pip install torch torchvision --index-url https://download.pytorch.org/whl/cu124",
+
+    // Use xformers
+    "TORCH_COMMAND": "pip install torch==2.3.1 torchvision==0.18.1 --index-url https://download.pytorch.org/whl/cu121",
+    "COMMANDLINE_ARGS": "--xformers",
+
+    // Other Settings
+    "INSIGHTFACE_WHEEL": "insightface"
+  },
+
   "postStartCommand": "bash setup.sh",
   
   "portsAttributes": {
@@ -22,12 +34,8 @@
   "customizations": {
     "vscode": {
       "extensions": [
-        "minko.image-manager"
       ],
       "settings": {
-        "image-manager.exclude": [
-          "stable-diffusion-webui"
-        ]
       }
     }
   }

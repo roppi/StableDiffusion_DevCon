@@ -1,11 +1,14 @@
 # StableDiffusion_DevCon
-Windows + WSL2 + VSCode + Remote Containers + Stable Diffusion WebUI ( + Forge )
+Windows + WSL2 + VSCode + Remote Containers + Stable Diffusion WebUI Forge
 
-ローカル環境でサクッと Stable Diffusion を動かすための設定など。  
-nvidiaのグラボがあることと、WSL2 + Docker Desktop + VSCode が利用できることが前提です。
+ローカル環境でサクッと Stable Diffusion Forge を動かすための設定など。  
+nvidiaのグラボがあることと、WSL2 + Docker + VSCode が利用できることが前提です。
 
-オプションで、Stable Diffusion WebUI Forge を組み込めます。  
-Forgeを使用する場合は、途中で「WebUI Forge を 使用しますか？[y/N] 」と聞かれるので`y`を入力してください。
+`devcontainer.json`にて、WebUI の各種パラメータを設定しています。
+
+例えば `TORCH_COMMAND` の値を変えることで、CUDA 12.4 + Pytorch 2.5 の構成に変更可能です。  
+※標準では、CUDA 12.1 + Pytorch 2.3.1 + xformers で起動します。
+
 
 ## Credits
 - [Stable Diffusion](https://github.com/Stability-AI/stablediffusion)
@@ -78,7 +81,7 @@ sudo apt-get install -y nvidia-container-toolkit
 - https://hub.docker.com/r/nvidia/cuda
 
 
-現時点で最新の Cuda 12.3.1 Ubuntu 22.04 の場合は `nvidia/cuda:12.3.1-base-ubuntu22.04` なので以下のコマンドを実行。
+現時点で最新の Cuda 12.3.1 Ubuntu 22.04 の場合は `nvidia/cuda:12.4.1-base-ubuntu22.04` なので以下のコマンドを実行。
 
 ``` bash
 sudo docker run --rm --gpus all nvidia/cuda:12.3.1-base-ubuntu22.04 nvidia-smi
