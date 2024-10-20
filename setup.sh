@@ -22,7 +22,7 @@ function setup_symlinks {
     rm -rf "./${clone_dir}/embeddings"
     ln -s "$(pwd)/Negatives/" "./${clone_dir}/embeddings"
     # Extensions
-    rm -rf ./${clone_dir}/extensions
+    rm -rf "./${clone_dir}/extensions"
     ln -s "$(pwd)/Extensions/" "./${clone_dir}/extensions"
     # Setting Files
     ln -s "$(pwd)/Settings/params.txt" "./${clone_dir}/params.txt"
